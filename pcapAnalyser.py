@@ -70,7 +70,7 @@ def analyze_results():
     plt.xlabel("Packet Size (bytes)")
     plt.ylabel("Frequency")
     plt.grid()
-    plt.savefig("pkt_size_distribution_.png")
+    plt.savefig("pkt_size_distribution_of_pcapfile.png")
     plt.show()
 
 
