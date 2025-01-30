@@ -120,7 +120,7 @@ def analyze_localhost_phone_request(packets, keyword= "Company of phone = " ):
     port_used = None
     
     for pkt in packets:
-        if IP in pkt and pkt[IP].src == localhost_ip and Raw in pkt:
+        if IP in pkt and pkt[IP].src == localhost_ip and TCP in pkt and Raw in pkt:
             payload = pkt[Raw].load.decode(errors="ignore")
             
             if keyword in payload:
