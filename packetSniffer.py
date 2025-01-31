@@ -2,8 +2,8 @@ from scapy.all import *
 import matplotlib.pyplot as plt
 import pandas as pd
 import numpy as np
+import argparse
 from collections import defaultdict
-import time
 
 # Initialize variables
 packets=[]
@@ -17,7 +17,7 @@ src_dst_data = defaultdict(int)
 
 def packet_handler(packet):
     global total_data, total_packets, packet_sizes, src_flows, dst_flows, src_dst_data
-
+    
     packet_size = len(packet)
     packet_sizes.append(packet_size)
     total_data += packet_size
@@ -36,12 +36,14 @@ def packet_handler(packet):
         dst_flows[dst_ip] += 1
 
 
-def start_sniffing(interface):
+def start_sniffing(interface, timeout):
     print(f"Starting packet sniffing on interface {interface}...")
-    sniff(iface=interface, prn=packet_handler, store=0)
+    sniff(iface="lo", prn=packet_handler, store=0,timeout=int(timeout))
     # sniff(offline="5.pcap", prn=packet_handler, store=0)
 
 def analyze_results():
+    if len(packet_sizes)==0:
+        return
     # Metrics
     print("\n** Packet Sniffer Metrics **")
     print(f"Total Data Transferred: {total_data} bytes")
@@ -70,7 +72,7 @@ def analyze_results():
     # print("Destination Flows:", dst_flows)
 
     # Plot packet size distribution
-    plt.hist(packet_sizes, bins=20, edgecolor="black",color='blue', alpha=0.7)
+    plt.hist(packet_sizes, bins=5, edgecolor="black",color='blue', alpha=0.7)
     plt.title("Packet Size Distribution")
     plt.xlabel("Packet Size (bytes)")
     plt.ylabel("Frequency")
@@ -80,9 +82,15 @@ def analyze_results():
 
 
 if __name__ == "__main__":
-    interface = "eth0"  # Replace with your network interface name
+    
+    parser = argparse.ArgumentParser()
+    parser.add_argument("-t","--timeout", help="Timeout for sniffing")
+    parser.add_argument("-i","--interface", help="Interface to sniff on",default="lo")
+    parser.add_argument("-f","--file", help="Path to PCAP file",default="5.pcap")
+    args = parser.parse_args()
+    
     print("Packet Sniffing Program started...")
-    start_sniffing(interface)
+    start_sniffing(args.interface,args.timeout)
     print("Packet Sniffing Program completed.")
     print("Analyzing results...")
     analyze_results()
