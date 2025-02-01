@@ -1,13 +1,4 @@
 # CS331-Computer-Networks-Assignment1
-
-This repository contains source code of assignment 1 of CS331 Computer Networks course at IITGN...
-
-Run packerSniffer.py file using below command
-
-`python packerSniffer.py <pcap file name>`
-
-Eg: python packerSniffer.py 5.pcap
-
 ```python
 sniff(
     count=0,          # Number of packets to capture (0 means infinite)
@@ -27,7 +18,7 @@ sniff(
 )
 ```
 
-# Packet Sniffer & PCAP Analyzer
+# Packet Sniffer & Traffic Analysis
 
 ## Overview
 
@@ -63,8 +54,7 @@ pip install scapy matplotlib
   ```bash
   python packetSnifferPart2.py
   ```
-
-#### **pcapAnalyser.py**
+### 3. **pcapAnalyser.py**
 
 - **Description**: Reads packets from a PCAP file, extracts key metrics, and stores results in log files.
 - **Usage**:
@@ -72,16 +62,6 @@ pip install scapy matplotlib
   python pcapAnalyser.py
   ```
 - **Output**: Stores logs in `pcapAnalyzer_logs/`.
-
-### 3. Packet Replay
-
-#### **scapyReplay.py**
-
-- **Description**: Replays packets from a PCAP file onto a network interface.
-- **Usage**:
-  ```bash
-  python scapyReplay.py
-  ```
 
 ### 4. Speed Test
 
