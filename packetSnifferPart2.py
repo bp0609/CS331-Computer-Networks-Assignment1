@@ -42,6 +42,7 @@ def find_file_name_packet(packets, file_name_keyword="The name of file is ="):
                 src_ip = pkt[IP].src  # Extract source IP
                 
                 print("\n** TCP Packet Containing File Name **")
+                print(f"String Containing File Name: '{payload}'")
                 print(f"File Name: {file_name}")
                 print(f"TCP Checksum: {tcp_checksum}")
                 print(f"Source IP Address: {src_ip}")
@@ -53,7 +54,6 @@ def find_file_name_packet(packets, file_name_keyword="The name of file is ="):
 
 def count_packets_with_ip(packets, ip):
     count = sum(1 for pkt in packets if IP in pkt and pkt[IP].src == ip)
-    print(f"Total packets with IP {ip}: {count}")
     return count
 
 def analyze_localhost_phone_request(packets, keyword="Company of phone is ="):
@@ -70,11 +70,12 @@ def analyze_localhost_phone_request(packets, keyword="Company of phone is ="):
                 
                 print("\n** Localhost Phone Company Request Found **")
                 print(f"Port Used by Localhost: {port_used}")
+                print(f"String Containing Company Name: '{payload}'")
                 print(f"Company Name: {company_name}")
                 break  # Stop after finding the first matching packet
                 
     # Count total packets from localhost
-    total_packets = count_packets_with_ip(packets, localhost_ip)
+    total_packets = sum(1 for pkt in packets if IP in pkt and pkt[IP].src == localhost_ip)
     print(f"Total packets from localhost: {total_packets}")
     
     return port_used, total_packets
@@ -88,5 +89,5 @@ if __name__ == "__main__":
     
     if file_name:
         total_packets = count_packets_with_ip(packets, src_ip)
-    
+    print(f"Total packets from {src_ip}: {total_packets}")
     port_used, total_packets_localhost = analyze_localhost_phone_request(packets)
