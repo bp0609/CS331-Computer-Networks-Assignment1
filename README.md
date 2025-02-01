@@ -1,4 +1,17 @@
 # CS331-Computer-Networks-Assignment1
+# Packet Sniffer & Packet Traffic Analysis
+
+## Overview
+
+This project consists of multiple scripts designed for network packet sniffing, analyzing PCAP files, and replaying captured packets. The project is part of the **CS331: Computer Networks** assignment and includes packet capturing, metric analysis, and visualization.
+
+## Installation
+
+Ensure you have **Python 3.x** installed along with the required dependencies. You can install dependencies using:
+
+```bash
+pip install scapy matplotlib
+```
 ```python
 sniff(
     count=0,          # Number of packets to capture (0 means infinite)
@@ -18,19 +31,15 @@ sniff(
 )
 ```
 
-# Packet Sniffer & Traffic Analysis
+## Finding Network Interface
 
-## Overview
-
-This project consists of multiple scripts designed for network packet sniffing, analyzing PCAP files, and replaying captured packets. The project is part of the **CS331: Computer Networks** assignment and includes packet capturing, metric analysis, and visualization.
-
-## Installation
-
-Ensure you have **Python 3.x** installed along with the required dependencies. You can install dependencies using:
+Before running the packet sniffer, you need to identify the correct network interface. You can find your active interface using:
 
 ```bash
-pip install scapy matplotlib
+ifconfig
 ```
+
+Look for interfaces such as `eth0`, `wlan0`, or others that are actively transmitting or receiving data.
 
 ## Scripts and Usage
 
@@ -54,6 +63,7 @@ pip install scapy matplotlib
   ```bash
   python packetSnifferPart2.py
   ```
+
 ### 3. **pcapAnalyser.py**
 
 - **Description**: Reads packets from a PCAP file, extracts key metrics, and stores results in log files.
@@ -72,6 +82,17 @@ pip install scapy matplotlib
   ```bash
   python speedTest.py -i <interface> -t <timeout> -f <pcap file>
   ```
+
+## Packet Transfer Using Ethernet Cable
+
+To ensure accurate packet capture, we used an **Ethernet cable** to create a direct communication channel between two machines:
+
+1. **Disabled Wi-Fi** on both machines to avoid interference.
+2. **Connected both machines via an Ethernet cable**, forming a dedicated data transfer channel.
+3. **Ran `tcpreplay` on one machine** to send packets at a controlled rate.
+4. **Executed `packetSniffer.py` on the other machine** to capture and analyze packets.
+
+This setup ensured **zero packet loss** and provided a controlled environment for traffic analysis. The Ethernet cable facilitated direct data transfer, eliminating potential interference from wireless networks.
 
 ## Log Files
 
@@ -102,3 +123,4 @@ Generated logs store detailed analysis results:
 ## Authors
 
 Developed as part of **CS331: Computer Networks Assignment**.
+
