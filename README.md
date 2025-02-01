@@ -83,7 +83,7 @@ Look for interfaces such as `eth0`, `wlan0`, or others that are actively transmi
   python speedTest.py -i <interface> -t <timeout> -f <pcap file>
   ```
 
-## Packet Transfer Using Ethernet Cable
+## Packet Transfer from one machine to other machine using Ethernet Cable
 
 To ensure accurate packet capture, we used an **Ethernet cable** to create a direct communication channel between two machines:
 
@@ -92,7 +92,7 @@ To ensure accurate packet capture, we used an **Ethernet cable** to create a dir
 3. **Ran `tcpreplay` on one machine** to send packets at a controlled rate.
 4. **Executed `packetSniffer.py` on the other machine** to capture and analyze packets.
 
-This setup ensured **zero packet loss** and provided a controlled environment for traffic analysis. The Ethernet cable facilitated direct data transfer, eliminating potential interference from wireless networks.
+This setup ensured provided a controlled environment for traffic analysis. The Ethernet cable facilitated direct data transfer, eliminating potential interference from wireless networks.
 
 ## Log Files
 
