@@ -1,0 +1,28 @@
+** Packet Sniffer Metrics **
+Total Data Transferred: 358447685 bytes
+Total Packets Transferred: 793265
+Minimum Packet Size: 42 bytes
+Maximum Packet Size: 1514 bytes
+Average Packet Size: 451.86 bytes
+
+Total unique Source-Destination Pairs: 41746
+Top 5 source-destination pairs by data transferred
+172.16.133.57:53807 -> 68.64.21.62:1853: 17049303 bytes
+172.16.133.95:49358 -> 157.56.240.102:443: 16966046 bytes
+172.16.133.36:64953 -> 67.217.64.99:443: 15424274 bytes
+67.217.64.99:443 -> 172.16.133.26:53037: 14611518 bytes
+172.16.128.201:1060 -> 172.16.133.6:1731: 5199055 bytes
+
+Top 5 source IPs by flow count:
+172.16.133.57: 30130 flows
+67.217.64.99: 17583 flows
+172.16.133.95: 16877 flows
+172.16.133.36: 16873 flows
+172.16.133.116: 16084 flows
+
+Top 5 destination IPs by flow count:
+172.16.139.250: 178694 flows
+68.64.21.62: 25357 flows
+172.16.133.57: 19432 flows
+172.16.133.26: 17400 flows
+67.217.64.99: 16461 flows
