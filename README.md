@@ -85,7 +85,7 @@ Look for interfaces such as `eth0`, `lo`, or others that are actively transmitti
   ```
 Run tcpreplay just after running speedTest.py.
 
-### To reproduce the output, run the below scripts in the following order
+## To reproduce the output, run the below scripts in the following order
 #### For Part 1
 ```bash
 python3 pcapAnalyzer.py
