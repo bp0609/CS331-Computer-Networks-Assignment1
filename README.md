@@ -26,3 +26,99 @@ sniff(
     *args, **kwargs   # Additional arguments
 )
 ```
+
+# Packet Sniffer & PCAP Analyzer
+
+## Overview
+
+This project consists of multiple scripts designed for network packet sniffing, analyzing PCAP files, and replaying captured packets. The project is part of the **CS331: Computer Networks** assignment and includes packet capturing, metric analysis, and visualization.
+
+## Installation
+
+Ensure you have **Python 3.x** installed along with the required dependencies. You can install dependencies using:
+
+```bash
+pip install scapy matplotlib
+```
+
+## Scripts and Usage
+
+### 1. Packet Sniffer
+
+#### **packetSniffer.py**
+
+- **Description**: Captures live network packets and analyzes them.
+- **Usage**:
+  ```bash
+  python packetSniffer.py -i <interface> -t <timeout>
+  ```
+- **Output**: Stores logs in `snifferAnalysis_logs/`.
+
+### 2. PCAP Packet Analyzer
+
+#### **packetSnifferPart2.py**
+
+- **Description**: Reads packets from a PCAP file and analyzes them for specific patterns.
+- **Usage**:
+  ```bash
+  python packetSnifferPart2.py
+  ```
+
+#### **pcapAnalyser.py**
+
+- **Description**: Reads packets from a PCAP file, extracts key metrics, and stores results in log files.
+- **Usage**:
+  ```bash
+  python pcapAnalyser.py
+  ```
+- **Output**: Stores logs in `pcapAnalyzer_logs/`.
+
+### 3. Packet Replay
+
+#### **scapyReplay.py**
+
+- **Description**: Replays packets from a PCAP file onto a network interface.
+- **Usage**:
+  ```bash
+  python scapyReplay.py
+  ```
+
+### 4. Speed Test
+
+#### **speedTest.py**
+
+- **Description**: Captures and analyzes network packets while replaying from a PCAP file.
+- **Usage**:
+  ```bash
+  python speedTest.py -i <interface> -t <timeout> -f <pcap file>
+  ```
+
+## Log Files
+
+Generated logs store detailed analysis results:
+
+- **`pcapAnalyzer_logs/`**
+  - `src_flows.json`: Flow count of packets from source IPs.
+  - `dst_flows.json`: Flow count of packets to destination IPs.
+  - `metric_analyzer.txt`: Detailed network metrics including packet counts, transfer sizes, and top source-destination pairs.
+- **`snifferAnalysis_logs/`**
+  - `src_flows.json`: Flow count of packets from source IPs.
+  - `dst_flows.json`: Flow count of packets to destination IPs.
+  - `metric_analyzer.txt`: Packet analysis metrics.
+
+## Assignment Guidelines
+
+- Ensure the assignment follows the submission rules.
+- Include the GitHub repository link.
+- Follow the **PCAP File Selection** rule based on your Team ID (`X = Team ID % 9`).
+- Generate required metrics such as:
+  - Total data transferred (bytes)
+  - Total packets transferred
+  - Min, max, and average packet size
+  - Source-destination pairs
+  - Packet loss analysis
+  - Top speeds in **pps** and **mbps**
+
+## Authors
+
+Developed as part of **CS331: Computer Networks Assignment**.
