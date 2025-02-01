@@ -39,7 +39,7 @@ Before running the packet sniffer, you need to identify the correct network inte
 ifconfig
 ```
 
-Look for interfaces such as `eth0`, `wlan0`, or others that are actively transmitting or receiving data.
+Look for interfaces such as `eth0`, `lo`, or others that are actively transmitting or receiving data.
 
 ## Scripts and Usage
 
@@ -53,6 +53,7 @@ Look for interfaces such as `eth0`, `wlan0`, or others that are actively transmi
   python packetSniffer.py -i <interface> -t <timeout>
   ```
 - **Output**: Stores logs in `snifferAnalysis_logs/`.
+- Run tcpreplay just after running packetSniffer.py. 
 
 ### 2. PCAP Packet Analyzer
 
@@ -82,6 +83,36 @@ Look for interfaces such as `eth0`, `wlan0`, or others that are actively transmi
   ```bash
   python speedTest.py -i <interface> -t <timeout> -f <pcap file>
   ```
+Run tcpreplay just after running speedTest.py.
+
+### To reproduce the output, run the below scripts in the following order
+#### For Part 1
+```bash
+python3 pcapAnalyzer.py
+```
+Open two terminals and speedTest.py one terminal and tcpreplay on other terminal.
+
+Terminal 1:
+```bash
+sudo python3 speedTest.py -i <interface>
+```
+Terminal 2:
+```bash
+sudo tcpreplay -i <interface> --pps=2000 5.pcap
+```
+After getting the suitable speed for packet transfer with minimal packet loss we calculate metrics using packetSniffer.py file.
+
+Again open two terminal and run packetSniffer.py on one terminal and tcpreplay on other.
+
+Terminal 1:
+```bash
+sudo python3 packetSniffer.py -i <interface>
+```
+Terminal 2:
+```bash
+sudo tcpreplay -i <interface> --pps=2000 5.pcap
+```
+> Note: We can enter a flag in the command -t for timeout which will stop siffing or we can use keyboard interrupt to stop sniffing just after the tcpreplay completes.
 
 ## Packet Transfer from one machine to other machine using Ethernet Cable
 
@@ -93,6 +124,12 @@ To ensure accurate packet capture, we used an **Ethernet cable** to create a dir
 4. **Executed `packetSniffer.py` on the other machine** to capture and analyze packets.
 
 This setup ensured provided a controlled environment for traffic analysis. The Ethernet cable facilitated direct data transfer, eliminating potential interference from wireless networks.
+
+### Part 2
+To reproduce output for part 2 execute below command
+```bash
+sudo python3 packetSnifferPart2.py
+```
 
 ## Log Files
 
@@ -106,19 +143,6 @@ Generated logs store detailed analysis results:
   - `src_flows.json`: Flow count of packets from source IPs.
   - `dst_flows.json`: Flow count of packets to destination IPs.
   - `metric_analyzer.txt`: Packet analysis metrics.
-
-## Assignment Guidelines
-
-- Ensure the assignment follows the submission rules.
-- Include the GitHub repository link.
-- Follow the **PCAP File Selection** rule based on your Team ID (`X = Team ID % 9`).
-- Generate required metrics such as:
-  - Total data transferred (bytes)
-  - Total packets transferred
-  - Min, max, and average packet size
-  - Source-destination pairs
-  - Packet loss analysis
-  - Top speeds in **pps** and **mbps**
 
 ## Authors
 
