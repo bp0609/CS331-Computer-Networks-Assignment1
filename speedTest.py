@@ -23,7 +23,7 @@ def start_sniffing(interface, timeout):
     global start_time
     print(f"Starting packet sniffing on interface {interface}...")
     start_time = time.time()
-    sniff(iface=interface, prn=packet_handler, store=0, timeout=int(timeout))
+    sniff(iface=interface, prn=packet_handler, store=0, timeout=int(timeout) if timeout else None,filter="not port 67 and not port 68 and not port 5353 and not ip6")
     end_time = time.time()
     duration = end_time - start_time if start_time else 1
     analyze_results(duration)
@@ -45,7 +45,7 @@ def analyze_results(duration):
 if __name__ == "__main__":
     # Take argument from command line for timeout
     parser = argparse.ArgumentParser()
-    parser.add_argument("-t", "--timeout", help="Timeout for sniffing")
+    parser.add_argument("-t", "--timeout", help="Timeout for sniffing" ,default=None)
     parser.add_argument("-i", "--interface", help="Interface to sniff on", default="lo")
     parser.add_argument("-f", "--file", help="Path to PCAP file", default="5.pcap")
     args = parser.parse_args()
